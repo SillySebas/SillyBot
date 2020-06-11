@@ -10,6 +10,12 @@ client.once('ready', () => {
 });
 
 //Commands
+
+client.on("guildMemberAdd", function(member){
+    const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
+    member.roles.add("Hello")
+});
+
 client.on('message', message => {
     let interval;
     //Administrative Commands
@@ -161,5 +167,6 @@ client.on('message', message => {
     }
 });
 
+client.on
 
 client.login(process.env.BOT_TOKEN);
