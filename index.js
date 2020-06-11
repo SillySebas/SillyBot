@@ -24,7 +24,10 @@ client.on('message', message => {
         /*Kick Commands
         * Kicks User From Server
         */
-
+        if(message.content.startsWith(`${prefix}test`))
+        {
+            message.reply("Test Completed");
+        }
         if(message.content.startsWith(`${prefix}giphy`))
         {
             let search = message.content.substring(6);
