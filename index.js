@@ -13,7 +13,8 @@ client.once('ready', () => {
 
 client.on("guildMemberAdd", function(member){
     const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    member.roles.add("Hello")
+    let role = member.guild.roles.find(role => role.name === "Member");
+    member.addRole(role);
 });
 
 client.on('message', message => {
@@ -24,9 +25,9 @@ client.on('message', message => {
         /*Kick Commands
         * Kicks User From Server
         */
-        if(message.content.startsWith(`${prefix}test`))
+        if(message.content.startsWith(`ping`))
         {
-            message.reply("Test Completed");
+            message.reply("pong");
         }
         if(message.content.startsWith(`${prefix}giphy`))
         {
