@@ -12,9 +12,13 @@ client.once('ready', () => {
 //Commands
 
 client.on("guildMemberAdd", function(member){
+    member.reply(member);
     const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
     let role = member.guild.roles.find(role => role.name === "Member");
     member.addRole(role);
+    member.reply(channel);
+    member.reply(role);
+    member.reply(member);
 });
 
 client.on('message', message => {
