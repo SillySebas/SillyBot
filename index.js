@@ -11,26 +11,33 @@ client.once('ready', () => {
 
 //Commands
 
-client.on("guildMemberAdd", function(member){4
+client.on("guildMemberAdd", function(member){
+    
     const channel = member.guild.channels.cache.find(ch => ch.name === 'member-log');
-    let role = member.guild.roles.find(role => role.name === "Member");
-    member.addRole(role);
-    member.reply(channel);
-    member.reply(role);
-    member.reply(member);
+
+    channel.send("> <@"+member+"> HAS JOINED!!");
 });
 
 client.on('message', message => {
-    let interval;
+    let interval = "";
     //Administrative Commands
+
+    if(!message.member.id === "423571067483979787")
+    {
+        message.guild.channels.cache.find(ch => ch.name === 'sillybot-testzone').send("Message Sent!");
+    }
+    
+
+    if(message.content.startsWith(`${prefix}`))
+    {
     if(message.member.hasPermission(['ADMINISTRATOR']))
     {   
         /*Kick Commands
         * Kicks User From Server
         */
-        if(message.content.startsWith(`ping`))
+        if(message.content.startsWith(`${prefix}ping`))
         {
-            message.reply("pong");
+            message.reply("ping, whoops!");
         }
         if(message.content.startsWith(`${prefix}giphy`))
         {
@@ -63,7 +70,7 @@ client.on('message', message => {
             try{
                 member.kick().then((member) => 
                 {
-                    giphy.search('gifs', {"q": "fail"}).then((response) => {
+                    giphy.search('gifs', {"q": "kick"}).then((response) => {
                         let totalResponses = response.data.length;
                         let responseIndex = Math.floor((Math.random() * 10) + 1) % totalResponses;
                         let responseFinal = response.data[responseIndex];
@@ -80,7 +87,6 @@ client.on('message', message => {
                 message.channel.send(`> :no_entry_sign: No User By Name ${message.content.substring(6)}`)
             }
         }
-
         /*Ban Command
         * Bans User From Server
         */
@@ -172,8 +178,8 @@ client.on('message', message => {
     {
         message.channel.send(`> :no_entry_sign: Command Require Permission Level : ADMINISTRATOR`)
     }
+    }
+    
 });
-
-client.on
 
 client.login(process.env.BOT_TOKEN);
